@@ -1,14 +1,7 @@
-
+require('dotenv/config');
 const textOutput = document.getElementById('display');
-const apiKeyInput = document.getElementById('apiKey');
 const answer = document.getElementById('response');
 
-
-if (localStorage.getItem('apiKey')) {
-    apiKeyInput.style.display = "none";
-    document.getElementById('keyState').textContent = 'Key stored';
-    document.getElementById('keyButton').style.display = 'none';
-}
 
 function submit() {
     let textInput = document.getElementById('input').value;
@@ -16,15 +9,7 @@ function submit() {
     sendToOpenAI(textInput);
 }
 
-function storeApiKey() {    
-    let apiKey = apiKeyInput.value;
-    localStorage.setItem('apiKey', apiKey);
-    apiKeyInput.style.display = "none";
-}
-
 function sendToOpenAI(text) {
-    // Your OpenAI API key
-    const apiKey = localStorage.getItem('apiKey');
 
     // API Endpoint
     const endpoint = 'https://api.openai.com/v1/chat/completions';
@@ -49,7 +34,7 @@ function sendToOpenAI(text) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`,
+            'Authorization': `Bearer ${ChatGPT-apiKey}`,
         },
         body: JSON.stringify(data),
     })
