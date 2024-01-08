@@ -1,7 +1,5 @@
-require('dotenv/config');
 const textOutput = document.getElementById('display');
 const answer = document.getElementById('response');
-
 
 function submit() {
     let textInput = document.getElementById('input').value;
