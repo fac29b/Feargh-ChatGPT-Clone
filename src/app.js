@@ -1,15 +1,26 @@
-require('../dotenv/config');
-
+// app.js
 const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const ejs = require('ejs');
+
 const app = express();
-const port = 3000;
 
-app.use(express.static('public'));
+// Set 'views' directory for EJS templates
+app.set('views', path.join(__dirname, '../views'));
 
+// Use EJS as the template engine
+app.set('view engine', 'ejs');
+
+// Serve static files from the public folder
+app.use(express.static(path.join(__dirname, '../public')));
+
+// Body parser middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Example route handling
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+  res.render('index');
 });
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});
+module.exports = app;
